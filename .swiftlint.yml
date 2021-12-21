@@ -1,0 +1,10 @@
+line_length:
+- 200 # warning
+- 300 # error
+
+function_body_length:
+- 50 # warning
+- 60 # error
+
+disabled_rules:
+- trailing_whitespace
