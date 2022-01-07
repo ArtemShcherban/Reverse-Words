@@ -1,5 +1,5 @@
 //
-//  ReversWordsController.swift
+//  ReverseWordsController.swift
 //  Reverse words
 //
 //  Created by Artem Shcherban on 05.01.2022.
@@ -7,17 +7,18 @@
 
 import UIKit
 
-class ReverseWordsController: UIViewController {
+final class ReverseWordsViewController: UIViewController {
     
     private var reverseWordsModel: ReverseWordsModel!
     private var stringToEditing: String!
     
     private var reverseWordsView: ReverseWordsView! {
-        
+
         guard isViewLoaded else { return nil }
-        return (view as? ReverseWordsView)
+        return view as? ReverseWordsView
+
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +51,7 @@ class ReverseWordsController: UIViewController {
     }
 }
 
-extension ReverseWordsController: UITextFieldDelegate {
+extension ReverseWordsViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         stringToEditing = textField.text
@@ -65,15 +66,15 @@ extension ReverseWordsController: UITextFieldDelegate {
             reverseWordsView.reverseButton.alpha = 0.6
             reverseWordsView.setSeparatorViewColor(colorOn: false)
         } else if textField.hasText == true && stringToEditing == textField.text {
-            textField.textColor = ThemeConstants.AppColors.greyColor
+            textField.textColor = ColorsConstants.greyColor
             return true
         } else if textField.hasText == true && reverseWordsView.reverseButton.isSelected == true {
-            textField.textColor = ThemeConstants.AppColors.greyColor
+            textField.textColor = ColorsConstants.greyColor
             reverseWordsView.reverseTextLabel.text = ""
             reverseWordsView.reverseButton.isSelected = false
             reverseWordsView.setSeparatorViewColor(colorOn: true)
         } else {
-            textField.textColor = ThemeConstants.AppColors.greyColor
+            textField.textColor = ColorsConstants.greyColor
             reverseWordsView.reverseButton.isEnabled = true
             reverseWordsView.reverseButton.alpha = 1
             reverseWordsView.setSeparatorViewColor(colorOn: true)
@@ -83,7 +84,7 @@ extension ReverseWordsController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.hasText == true {
-            textField.textColor = ThemeConstants.AppColors.blueColor
+            textField.textColor = ColorsConstants.blueColor
             reverseWordsView.reverseButton.isEnabled = true
             reverseWordsView.reverseButton.alpha = 1
             reverseWordsView.setSeparatorViewColor(colorOn: true)
@@ -103,7 +104,7 @@ extension ReverseWordsController: UITextFieldDelegate {
     }
 }
 
-private extension ReverseWordsController {
+private extension ReverseWordsViewController {
     func setupHideKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false

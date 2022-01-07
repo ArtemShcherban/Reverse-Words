@@ -7,10 +7,10 @@
 
 import UIKit
 
-struct SizesConstants {
+struct SizeConstants {
     
     struct Indents {
-        static let leftIndent: CGFloat = 16
-        static let rightIndent: CGFloat = -16
+        static let left: CGFloat = 16
+        static let right: CGFloat = -16
     }
 }
