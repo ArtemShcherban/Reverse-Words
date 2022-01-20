@@ -9,6 +9,12 @@ import UIKit
 
 struct FontConstants {
     
+    struct FontName {
+        static let sfUIDisplayRegular = "SFUIDisplay-Regular"
+        static let sfUIDisplayBold = "SFUIDisplay-Bold"
+        static let sfUIDisplaySemibold = "SFUIDisplay-Semibold"
+    }
+    
     struct Size {
         
         static let title: CGFloat = 34
