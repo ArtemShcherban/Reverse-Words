@@ -13,6 +13,8 @@ class ReverseWordsUITests: XCTestCase {
     
     private lazy var textToReverse = app.textFields["TextToReverse"]
     private lazy var reverseTextLabel = app.staticTexts["ReverseTextLabel"]
+    private lazy var segmentControl = app.segmentedControls["RulesSegmentControl"]
+    private lazy var textToIgnore = app.textFields["TextToIgnore"]
     private lazy var reverseButton = app.buttons["ReverseButton"]
     private lazy var mainView = app.otherElements["ReverseWordsView"]
     private lazy var returnButton = app.buttons["Return"]
@@ -77,43 +79,91 @@ class ReverseWordsUITests: XCTestCase {
         let inputString = "Super Retina XDR display"
         let expectedButtonTitle = "Reverse"
         
-        //        when
+        //       when
         textToReverse.tap()
         textToReverse.typeText(inputString)
         returnButton.tap()
         
-        //        then
+        //       then
         XCTAssertFalse(reverseButton.isSelected)
         XCTAssertTrue(reverseButton.isEnabled)
         XCTAssertEqual(reverseButton.label, expectedButtonTitle, "Button title should be 'Reverse'")
     }
     
-    func testReverseButtonPressedFirstTime() {
-        //       given
-        textToReverse.tap()
-        textToReverse.typeText("Super Retina XDR display \n")
+    func testTextToIgnoreShouldAppearAfterSegmentIndexChanged() {
         
-        //        when
-        reverseButton.tap()
+        segmentControl.buttons.element(boundBy: 2).tap()
         
-        //        then
-        XCTAssertTrue(reverseButton.isSelected)
-        XCTAssertEqual(reverseButton.label, "Clear", "Button title should be 'Clear'")
-        XCTAssertTrue(reverseButton.isEnabled)
+        XCTAssertTrue(textToIgnore.exists)
     }
     
-    func testReverseButtonPressedSecondTime() {
+    func testResultCheckWithAlphabetRule() {
         //       given
+        let inputString = "Q$W§E(RT¿Y8"
+        let expectedString = "Y$T§R(EW¿Q8"
+        
+        //       when
         textToReverse.tap()
-        textToReverse.typeText("Super Retina XDR display \n")
+        textToReverse.typeText(inputString)
+        segmentControl.buttons.element(boundBy: 0).tap()
         reverseButton.tap()
         
-        //        when
+        //       then
+        XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
+    }
+    
+    func testResultCheckWithCustomRule() {
+        //       given
+        let inputString = "Q$W§E(RT¿Y8"
+        let customExceptions = "¿W$"
+        let expectedString = "8$WYTR(E¿§Q"
+        
+        //       when
+        segmentControl.buttons.element(boundBy: 2).tap()
+        textToIgnore.tap()
+        textToIgnore.typeText(customExceptions)
+        textToReverse.tap()
+        textToReverse.typeText(inputString)
+        returnButton.tap()
         reverseButton.tap()
         
-        //        then
-        XCTAssertFalse(reverseButton.isSelected)
-        XCTAssertEqual(reverseButton.label, "Reverse", "Button title should be 'Reverse'")
-        XCTAssertFalse(reverseButton.isEnabled)
+        //       then
+        XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
+    }
+    
+    func testResultChecAfeterSegmentIndexChangedkWithAlphabetRule() {
+        //       given
+        let inputString = "Q$W§E(RT¿Y8"
+        let expectedString = "Y$T§R(EW¿Q8"
+        
+        //       when
+        textToReverse.tap()
+        textToReverse.typeText(inputString)
+        returnButton.tap()
+        reverseButton.tap()
+        segmentControl.buttons.element(boundBy: 0).tap()
+        
+        //       then
+        XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
+    }
+    
+    func testResultChecAfeterSetCustomRule() {
+        //       given
+        let inputString = "Q$W§E(RT¿Y8"
+        let customExceptions = "¿W$"
+        let expectedString = "8$WYTR(E¿§Q"
+        
+        //       when
+        textToReverse.tap()
+        textToReverse.typeText(inputString)
+        returnButton.tap()
+        reverseButton.tap()
+        segmentControl.buttons.element(boundBy: 2).tap()
+        textToIgnore.tap()
+        textToIgnore.typeText(customExceptions)
+        returnButton.tap()
+        
+        //       then
+        XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
     }
 }

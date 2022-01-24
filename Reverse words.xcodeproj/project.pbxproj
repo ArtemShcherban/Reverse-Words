@@ -18,6 +18,9 @@
 		F49DEC152794451300E54428 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC142794451300E54428 /* AppConstants.swift */; };
 		F49DEC1727945E2F00E54428 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC1627945E2F00E54428 /* SeparatorView.swift */; };
 		F49DEC19279469FB00E54428 /* ReverseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC18279469FB00E54428 /* ReverseButton.swift */; };
+		F49DEC1D279C3EC900E54428 /* RulesSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */; };
+		F49DEC23279C905900E54428 /* RulesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC22279C905900E54428 /* RulesConstants.swift */; };
+		F49DEC27279D9D2000E54428 /* ReverseWordsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */; };
 		F4CF007327848CA9004EE01A /* ColorsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF007227848CA9004EE01A /* ColorsConstants.swift */; };
 		F4CF00752784921B004EE01A /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF00742784921B004EE01A /* FontConstants.swift */; };
 		F4CF0077278494CD004EE01A /* SizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0076278494CD004EE01A /* SizeConstants.swift */; };
@@ -64,6 +67,9 @@
 		F49DEC142794451300E54428 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F49DEC1627945E2F00E54428 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		F49DEC18279469FB00E54428 /* ReverseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseButton.swift; sourceTree = "<group>"; };
+		F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesSegmentControl.swift; sourceTree = "<group>"; };
+		F49DEC22279C905900E54428 /* RulesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesConstants.swift; sourceTree = "<group>"; };
+		F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsTextField.swift; sourceTree = "<group>"; };
 		F4CF007227848CA9004EE01A /* ColorsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConstants.swift; sourceTree = "<group>"; };
 		F4CF00742784921B004EE01A /* FontConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		F4CF0076278494CD004EE01A /* SizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeConstants.swift; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 				F4CF007227848CA9004EE01A /* ColorsConstants.swift */,
 				F4CF00742784921B004EE01A /* FontConstants.swift */,
 				F4CF0076278494CD004EE01A /* SizeConstants.swift */,
+				F49DEC22279C905900E54428 /* RulesConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -245,6 +252,8 @@
 				F4CF007A2785E934004EE01A /* ReverseWordsView.swift */,
 				F49DEC1627945E2F00E54428 /* SeparatorView.swift */,
 				F49DEC18279469FB00E54428 /* ReverseButton.swift */,
+				F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */,
+				F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,8 +453,11 @@
 			files = (
 				F4CF00752784921B004EE01A /* FontConstants.swift in Sources */,
 				F49DEC152794451300E54428 /* AppConstants.swift in Sources */,
+				F49DEC23279C905900E54428 /* RulesConstants.swift in Sources */,
 				F49DEC1727945E2F00E54428 /* SeparatorView.swift in Sources */,
+				F49DEC1D279C3EC900E54428 /* RulesSegmentControl.swift in Sources */,
 				F4CF007D2785E954004EE01A /* ReverseWordsController.swift in Sources */,
+				F49DEC27279D9D2000E54428 /* ReverseWordsTextField.swift in Sources */,
 				F4CF007327848CA9004EE01A /* ColorsConstants.swift in Sources */,
 				F4762FE02767694000B6057A /* AppDelegate.swift in Sources */,
 				F4CF0077278494CD004EE01A /* SizeConstants.swift in Sources */,
@@ -580,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -635,7 +647,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -654,7 +666,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34XV2JSY5D;
 				INFOPLIST_FILE = "Reverse words/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -675,7 +687,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34XV2JSY5D;
 				INFOPLIST_FILE = "Reverse words/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

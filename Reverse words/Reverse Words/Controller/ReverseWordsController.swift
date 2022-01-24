@@ -13,6 +13,7 @@ final class ReverseWordsViewController: UIViewController {
     private var reverseWordsModel: ReverseWordsModel!
     private var stringToEditing: String!
     
+    private var model: Any?
     private var reverseWordsView: ReverseWordsView? {
         
         view as? ReverseWordsView
@@ -25,6 +26,7 @@ final class ReverseWordsViewController: UIViewController {
         reverseWordsView?.addSubViews()
         reverseWordsView?.setupAccessibility()
         reverseWordsView?.setConstraints()
+        reverseWordsView?.setRulesSegmentControlConstraints()
         reverseWordsView?.setReverseButtonConstraints()
         navigationItem.scrollEdgeAppearance = reverseWordsView?.createNavBarAppearence()
         configure()
@@ -33,7 +35,9 @@ final class ReverseWordsViewController: UIViewController {
     
     private func configure() {
         reverseWordsView?.textToReverseTextField.delegate = self
+        reverseWordsView?.textToIgnoreTextField.delegate = self
         reverseWordsView?.textToReverseTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        reverseWordsView?.segmentControl.addTarget(self, action: #selector(rulesSegmentControlIndexChanged), for: .valueChanged)
         reverseWordsView?.reverseButton.addTarget(self, action: #selector(reverseButtonPressed), for: .touchUpInside)
     }
     
@@ -63,11 +67,56 @@ final class ReverseWordsViewController: UIViewController {
             reverseWordsView?.textToReverseTextField.text = ""
             resetToInitialState()
         } else {
-            reverseWordsView?.reverseTextLabel.text =
-            (reverseWordsModel?.reverseWords(reverseWordsView?.textToReverseTextField.text ?? ""))
+            reverseWordsView?.reverseTextLabel.text = reverseInputedString()
             reverseWordsView?.reverseButton.isSelected = true
             reverseWordsView?.separatorView.isActive = false
         }
+    }
+    
+    @objc func rulesSegmentControlIndexChanged() {
+        ruleSelection()
+        textToIgnoreTextFieldControl()
+        if reverseWordsView?.reverseButton.isSelected == true {
+            reverseWordsView?.reverseTextLabel.text = reverseInputedString()
+        }
+    }
+    
+    private func ruleSelection() {
+        if reverseWordsView?.segmentControl.selectedSegmentIndex == 0 {
+            reverseWordsView?.subTitleTextLabel.text = RulesConstants.alphabetRule
+            
+        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
+            reverseWordsView?.subTitleTextLabel.text = RulesConstants.customRule
+            
+        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 1 {
+            reverseWordsView?.subTitleTextLabel.text = RulesConstants.mainRule
+        }
+    }
+    
+    private func textToIgnoreTextFieldControl() {
+        if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
+            reverseWordsView?.addTextToIgnoreTextField()
+            reverseWordsView?.setTextToIgnoreTextFieldConstraints()
+        } else {
+            reverseWordsView?.removeTextToIgnoreTextField()
+        }
+    }
+    
+    private func reverseInputedString() -> String {
+        let inputedString = reverseWordsView?.textToReverseTextField.text ?? ""
+        var reversedString = ""
+        
+        if reverseWordsView?.segmentControl.selectedSegmentIndex == 1 {
+            reversedString = reverseWordsModel.reverseWordsWithNoRules(inputedString)
+            
+        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 0 {
+            reversedString = reverseWordsModel.reverseWordsWithRule(inputedString, 0)
+            
+        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
+            reversedString = reverseWordsModel.reverseWordsWithRule(inputedString, 2)
+            
+        }
+        return reversedString
     }
     
     func resetToInitialState() {
@@ -81,21 +130,32 @@ final class ReverseWordsViewController: UIViewController {
 extension ReverseWordsViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        stringToEditing = textField.text
+        if textField == reverseWordsView?.textToReverseTextField {
+            stringToEditing = textField.text
+        }
         return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != stringToEditing {
-            reverseWordsView?.reverseTextLabel.text = ""
-            reverseWordsView?.separatorView.isActive = true
-            textField.textColor = ColorsConstants.greyColor
+        if textField == reverseWordsView?.textToReverseTextField {
+            if textField.text != stringToEditing {
+                reverseWordsView?.reverseTextLabel.text = ""
+                reverseWordsView?.separatorView.isActive = true
+                textField.textColor = ColorsConstants.greyColor
+            }
+        } else if textField == reverseWordsView?.textToIgnoreTextField {
+            reverseWordsModel.customExceptions = textField.text ?? ""
+            if reverseWordsView?.reverseButton.isSelected == true {
+                reverseWordsView?.reverseTextLabel.text = reverseInputedString()
+            }
         }
         return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        reverseWordsView?.separatorView.isActive = false
+        if textField == reverseWordsView?.textToReverseTextField {
+            reverseWordsView?.separatorView.isActive = false
+        }
         return true
     }
     
