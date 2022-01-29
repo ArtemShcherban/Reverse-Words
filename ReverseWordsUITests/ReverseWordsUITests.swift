@@ -11,6 +11,7 @@ class ReverseWordsUITests: XCTestCase {
     
     private var app: XCUIApplication!
     
+    private lazy var resultSwitch = app.switches["ResultSwitch"]
     private lazy var textToReverse = app.textFields["TextToReverse"]
     private lazy var reverseTextLabel = app.staticTexts["ReverseTextLabel"]
     private lazy var segmentControl = app.segmentedControls["RulesSegmentControl"]
@@ -147,7 +148,7 @@ class ReverseWordsUITests: XCTestCase {
         XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
     }
     
-    func testResultChecAfeterSetCustomRule() {
+    func testResultCheckAfeterSetCustomRule() {
         //       given
         let inputString = "Q$W§E(RT¿Y8"
         let customExceptions = "¿W$"
@@ -162,8 +163,25 @@ class ReverseWordsUITests: XCTestCase {
         textToIgnore.tap()
         textToIgnore.typeText(customExceptions)
         returnButton.tap()
+        reverseButton.tap()
         
         //       then
         XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
+    }
+    
+    func testReverseButtonStateWithEnteredStringAndSwitchControllFlipped() {
+        //       given
+        let inputString = "Q$W§E(RT¿Y8"
+        
+        //       when
+        resultSwitch.tap()
+        textToReverse.tap()
+        textToReverse.typeText(inputString)
+        resultSwitch.tap()
+        
+        //       then
+        
+        XCTAssertTrue(reverseButton.isSelected)
+
     }
 }

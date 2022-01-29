@@ -19,7 +19,7 @@ final class ReverseWordsTextField: UITextField {
         configure()
     }
      
-    func configure() {
+   private func configure() {
         backgroundColor = .white
         textColor = ColorsConstants.greyColor
         font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular,

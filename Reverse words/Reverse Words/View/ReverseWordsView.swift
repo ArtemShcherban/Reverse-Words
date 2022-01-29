@@ -9,6 +9,23 @@ import UIKit
 
 final class ReverseWordsView: UIView {
     
+    lazy var resultSwitch = ResultSwitch()
+    
+    lazy var resultSwitchTextLabel: UILabel = {
+     let tempResultSwitchTextLabel = UILabel()
+        tempResultSwitchTextLabel.backgroundColor = .white
+        tempResultSwitchTextLabel.textColor = ColorsConstants.greyColor.withAlphaComponent(0.2)
+        tempResultSwitchTextLabel.font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular, size: FontConstants.Size.regular)
+        tempResultSwitchTextLabel.numberOfLines = 0
+        tempResultSwitchTextLabel.lineBreakMode = .byWordWrapping
+        tempResultSwitchTextLabel.attributedText = NSMutableAttributedString(string: "result in real time",
+                                                                         attributes: [NSAttributedString.Key.kern:
+                                                                                       FontConstants.Kern.regular])
+        tempResultSwitchTextLabel.textAlignment = .left
+        
+        return tempResultSwitchTextLabel
+    }()
+    
     private lazy var inputTextView: UIView = {
         let tempInputTextView = UIView()
         tempInputTextView.backgroundColor = .white
@@ -75,6 +92,8 @@ final class ReverseWordsView: UIView {
     lazy var reverseButton = ReverseButton()
     
     func addSubViews() {
+        self.addSubview(resultSwitch)
+        self.addSubview(resultSwitchTextLabel)
         self.addSubview(inputTextView)
         self.addSubview(separatorView)
         self.addSubview(mainTitleTextLabel)
@@ -101,6 +120,7 @@ final class ReverseWordsView: UIView {
         reverseButton.accessibilityIdentifier = "ReverseButton"
         segmentControl.accessibilityIdentifier = "RulesSegmentControl"
         textToIgnoreTextField.accessibilityIdentifier = "TextToIgnore"
+        resultSwitch.accessibilityIdentifier = "ResultSwitch"
     }
     
     func createNavBarAppearence() -> UINavigationBarAppearance {
@@ -168,6 +188,21 @@ final class ReverseWordsView: UIView {
                                      reverseTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                                                             constant: SizeConstants.Indents.right),
                                      reverseTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 372)])
+    }
+    
+    func setResultSwitchConstraint() {
+        resultSwitch.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([resultSwitch.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant:
+                                                                            SizeConstants.Indents.left),
+                                     resultSwitch.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 12)])
+        
+        resultSwitchTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([resultSwitchTextLabel.leadingAnchor.constraint(equalTo: resultSwitch.trailingAnchor,
+                                                                                    constant: 10),
+                                     resultSwitchTextLabel.topAnchor.constraint(equalTo: resultSwitch.topAnchor),
+                                     resultSwitchTextLabel.widthAnchor.constraint(equalToConstant: 120),
+                                     resultSwitchTextLabel.heightAnchor.constraint(equalTo: resultSwitch.heightAnchor)])
+        
     }
     
     func setRulesSegmentControlConstraints() {
