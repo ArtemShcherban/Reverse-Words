@@ -26,6 +26,6 @@ final class ReverseWordsTextField: UITextField {
                       size: FontConstants.Size.regular)
         
         clearButtonMode = .whileEditing
-//        spellCheckingType = .no
+
     }
 }

@@ -81,6 +81,7 @@ final class ReverseWordsView: UIView {
     lazy var textToReverseTextField: ReverseWordsTextField = {
         let tempTextToReverseTextField = ReverseWordsTextField()
         tempTextToReverseTextField.placeholder = "Text to reverse"
+        tempTextToReverseTextField.spellCheckingType = .no
         return tempTextToReverseTextField
     }()
     

@@ -33,14 +33,13 @@ final class ReverseWordsModel {
         while wordIndex <= arrayOfInputedWords.count - 1 {
             bufferWord = ""
             excludedCharacters = [:]
-            
-            wordProcessing(arrayOfInputedWords[wordIndex], choice: choice)
+            singleWordProcessing(arrayOfInputedWords[wordIndex], choice: choice)
             
         }
         return arrayOfReversedWords.joined(separator: " ")
     }
     
-    private func wordProcessing(_ word: String.SubSequence, choice: Int) {
+    private func singleWordProcessing(_ word: String.SubSequence, choice: Int) {
         characterIndex = 0
         for character in word {
             if choice == 0 {
