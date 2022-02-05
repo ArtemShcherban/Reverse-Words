@@ -1,5 +1,5 @@
 //
-//  ReverseWordsController.swift
+//  ReverseWordsViewController.swift
 //  Reverse words
 //
 //  Created by Artem Shcherban on 05.01.2022.
@@ -12,7 +12,7 @@ final class ReverseWordsViewController: UIViewController {
     
     private var reverseWordsModel: ReverseWordsModel!
     private var stringToEditing: String!
-    private var customRuleToEditing: String!
+    private var ruleToEditing: String!
     
     private var reverseWordsView: ReverseWordsView? {
         
@@ -75,7 +75,7 @@ final class ReverseWordsViewController: UIViewController {
         } else if sender == reverseWordsView?.textToIgnoreTextField {
             reverseWordsModel.customExceptions = sender.text ?? ""
             
-            if  reverseWordsView?.resultSwitch.isOn == true {
+            if reverseWordsView?.resultSwitch.isOn == true {
                 textFieldDidChangeResultSwitchIsON()
             }
         }
@@ -143,13 +143,13 @@ final class ReverseWordsViewController: UIViewController {
     
     private func ruleSelection() {
         if reverseWordsView?.segmentControl.selectedSegmentIndex == 0 {
-            reverseWordsView?.subTitleTextLabel.text = RulesConstants.alphabetRule
+            reverseWordsView?.subtitleTextLabel.text = RulesConstants.alphabetRule
             
         } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
-            reverseWordsView?.subTitleTextLabel.text = RulesConstants.customRule
+            reverseWordsView?.subtitleTextLabel.text = RulesConstants.customRule
             
         } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 1 {
-            reverseWordsView?.subTitleTextLabel.text = RulesConstants.mainRule
+            reverseWordsView?.subtitleTextLabel.text = RulesConstants.mainRule
         }
     }
     
@@ -195,7 +195,7 @@ extension ReverseWordsViewController: UITextFieldDelegate {
         }
         
         if textField == reverseWordsView?.textToIgnoreTextField {
-            customRuleToEditing = textField.text
+            ruleToEditing = textField.text
         }
         return true
     }
@@ -206,14 +206,15 @@ extension ReverseWordsViewController: UITextFieldDelegate {
             reverseWordsView?.separatorView.isActive = false
             
         } else if reverseWordsView?.resultSwitch.isOn == false {
-            if textField == reverseWordsView?.textToReverseTextField {
+            if textField === reverseWordsView?.textToReverseTextField {
                 if textField.text != stringToEditing {
                     reverseWordsView?.reverseTextLabel.text = ""
                     reverseWordsView?.separatorView.isActive = true
                     textField.textColor = ColorsConstants.greyColor
+//                    textField.text = textField.text ?? ""  + "Artem"
                 }
-            } else if textField == reverseWordsView?.textToIgnoreTextField {
-                if reverseWordsView?.reverseButton.isSelected == true && textField.text != customRuleToEditing {
+            } else if textField === reverseWordsView?.textToIgnoreTextField {
+                if reverseWordsView?.reverseButton.isSelected == true && textField.text != ruleToEditing {
                     reverseWordsView?.reverseTextLabel.text = ""
                     reverseWordsView?.separatorView.isActive = true
                     reverseWordsView?.reverseButton.isSelected = false
@@ -224,7 +225,7 @@ extension ReverseWordsViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        if textField == reverseWordsView?.textToReverseTextField {
+        if textField === reverseWordsView?.textToReverseTextField {
             reverseWordsView?.separatorView.isActive = false
         }
         return true

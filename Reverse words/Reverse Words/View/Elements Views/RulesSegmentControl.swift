@@ -9,8 +9,6 @@ import UIKit
 
 final class RulesSegmentControl: UISegmentedControl {
     
-    private let activeColr = ColorsConstants.blueColor
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

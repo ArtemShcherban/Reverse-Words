@@ -21,12 +21,11 @@
 		F49DEC1D279C3EC900E54428 /* RulesSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */; };
 		F49DEC23279C905900E54428 /* RulesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC22279C905900E54428 /* RulesConstants.swift */; };
 		F49DEC27279D9D2000E54428 /* ReverseWordsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */; };
-		F49DEC2927A054D000E54428 /* ResultSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DEC2827A054D000E54428 /* ResultSwitch.swift */; };
 		F4CF007327848CA9004EE01A /* ColorsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF007227848CA9004EE01A /* ColorsConstants.swift */; };
 		F4CF00752784921B004EE01A /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF00742784921B004EE01A /* FontConstants.swift */; };
 		F4CF0077278494CD004EE01A /* SizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF0076278494CD004EE01A /* SizeConstants.swift */; };
 		F4CF007B2785E934004EE01A /* ReverseWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF007A2785E934004EE01A /* ReverseWordsView.swift */; };
-		F4CF007D2785E954004EE01A /* ReverseWordsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF007C2785E954004EE01A /* ReverseWordsController.swift */; };
+		F4CF007D2785E954004EE01A /* ReverseWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF007C2785E954004EE01A /* ReverseWordsViewController.swift */; };
 		F4CF00B427884518004EE01A /* ReverseWordsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CF00B327884518004EE01A /* ReverseWordsModelTests.swift */; };
 		F4EC90072769A9DF00B05BD2 /* SFUIDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4EC90062769A9DF00B05BD2 /* SFUIDisplay-Semibold.ttf */; };
 		F4EC900A276B34D600B05BD2 /* ReverseWordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EC9009276B34D600B05BD2 /* ReverseWordsModel.swift */; };
@@ -71,12 +70,11 @@
 		F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesSegmentControl.swift; sourceTree = "<group>"; };
 		F49DEC22279C905900E54428 /* RulesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesConstants.swift; sourceTree = "<group>"; };
 		F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsTextField.swift; sourceTree = "<group>"; };
-		F49DEC2827A054D000E54428 /* ResultSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSwitch.swift; sourceTree = "<group>"; };
 		F4CF007227848CA9004EE01A /* ColorsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConstants.swift; sourceTree = "<group>"; };
 		F4CF00742784921B004EE01A /* FontConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontConstants.swift; sourceTree = "<group>"; };
 		F4CF0076278494CD004EE01A /* SizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeConstants.swift; sourceTree = "<group>"; };
 		F4CF007A2785E934004EE01A /* ReverseWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsView.swift; sourceTree = "<group>"; };
-		F4CF007C2785E954004EE01A /* ReverseWordsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsController.swift; sourceTree = "<group>"; };
+		F4CF007C2785E954004EE01A /* ReverseWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsViewController.swift; sourceTree = "<group>"; };
 		F4CF00B127884518004EE01A /* ReverseWordsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReverseWordsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CF00B327884518004EE01A /* ReverseWordsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseWordsModelTests.swift; sourceTree = "<group>"; };
 		F4CF00B527884518004EE01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				F49DEC18279469FB00E54428 /* ReverseButton.swift */,
 				F49DEC1C279C3EC900E54428 /* RulesSegmentControl.swift */,
 				F49DEC26279D9D2000E54428 /* ReverseWordsTextField.swift */,
-				F49DEC2827A054D000E54428 /* ResultSwitch.swift */,
 			);
 			path = "Elements Views";
 			sourceTree = "<group>";
@@ -272,7 +269,7 @@
 		F4EC9013276D01D200B05BD2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F4CF007C2785E954004EE01A /* ReverseWordsController.swift */,
+				F4CF007C2785E954004EE01A /* ReverseWordsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -467,7 +464,7 @@
 				F49DEC23279C905900E54428 /* RulesConstants.swift in Sources */,
 				F49DEC1727945E2F00E54428 /* SeparatorView.swift in Sources */,
 				F49DEC1D279C3EC900E54428 /* RulesSegmentControl.swift in Sources */,
-				F4CF007D2785E954004EE01A /* ReverseWordsController.swift in Sources */,
+				F4CF007D2785E954004EE01A /* ReverseWordsViewController.swift in Sources */,
 				F49DEC27279D9D2000E54428 /* ReverseWordsTextField.swift in Sources */,
 				F4CF007327848CA9004EE01A /* ColorsConstants.swift in Sources */,
 				F4762FE02767694000B6057A /* AppDelegate.swift in Sources */,
@@ -475,7 +472,6 @@
 				F49DEC19279469FB00E54428 /* ReverseButton.swift in Sources */,
 				F4762FE22767694000B6057A /* SceneDelegate.swift in Sources */,
 				F4EC900A276B34D600B05BD2 /* ReverseWordsModel.swift in Sources */,
-				F49DEC2927A054D000E54428 /* ResultSwitch.swift in Sources */,
 				F4CF007B2785E934004EE01A /* ReverseWordsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

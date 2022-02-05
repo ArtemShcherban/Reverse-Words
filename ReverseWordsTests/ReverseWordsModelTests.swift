@@ -34,7 +34,7 @@ class ReverseWordsModelTests: XCTestCase {
         XCTAssertEqual(reversedString, expectedString, "Strings should be the same")
     }
     
-    func testAreTheStringsTheSameWithAlphabetRule() {
+    func testStringsEqualApplyingAlphabetRule() {
         
         let segmentControlIndex = 0
         
@@ -45,7 +45,7 @@ class ReverseWordsModelTests: XCTestCase {
         XCTAssertEqual(modelUnderTest.reverseWordsWithRule("Q$W§E(RT¿Y8", segmentControlIndex), "Y$T§R(EW¿Q8")
     }
     
-    func testAreTheStringsTheSameWithCustomRule() {
+    func testStringsEqualApplyingCustomRule() {
         modelUnderTest.customExceptions = "xl¿W$"
         let segmentControlIndex = 2
         

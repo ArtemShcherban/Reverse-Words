@@ -12,7 +12,9 @@ final class ReverseWordsModel {
     private lazy var bufferWord = ""
     private lazy var characterIndex = 0
     private lazy var excludedCharacters: [Int: String] = [:]
-    private lazy var alphabet = "abcdefghijklmnopqrstuvwxyz"
+    private lazy var arrayOfReversedWords: [String] = []
+    private lazy var wordIndex = 0
+    private static let alphabetLetters = "abcdefghijklmnopqrstuvwxyz"
     lazy var customExceptions = ""
     
     func reverseWordsWithNoRules(_ string: String) -> String {
@@ -25,47 +27,50 @@ final class ReverseWordsModel {
     func reverseWordsWithRule(_ string: String, _ choice: Int) -> String {
         
         let arrayOfInputedWords = string.split(separator: " ")
-        var arrayOfReversedWords: [String] = []
-        
-        var wordIndex = 0
+        arrayOfReversedWords = []
+        wordIndex = 0
         
         while wordIndex <= arrayOfInputedWords.count - 1 {
             bufferWord = ""
             excludedCharacters = [:]
-            characterIndex = 0
             
-            for character in arrayOfInputedWords[wordIndex] {
-                if choice == 0 {
-                    alphabetRuleMappingOf(character: character)
-                    characterIndex += 1
-                    
-                } else if choice == 2 {
-                    customRuleMappingOf(character: character)
-                    characterIndex += 1
-                }
-            }
+            wordProcessing(arrayOfInputedWords[wordIndex], choice: choice)
             
-            if bufferWord.isEmpty == false {
-                let reversedWord = String(bufferWord.reversed())
-                arrayOfReversedWords.append(addExcludedCharactersTo(reversedWord))
-                
-            } else {
-                arrayOfReversedWords.append(addExcludedCharactersTo(""))
-            }
-            wordIndex += 1
         }
         return arrayOfReversedWords.joined(separator: " ")
     }
     
-    private  func alphabetRuleMappingOf(character: Character) {
-        if alphabet.contains(character.lowercased()) {
+    private func wordProcessing(_ word: String.SubSequence, choice: Int) {
+        characterIndex = 0
+        for character in word {
+            if choice == 0 {
+                alphabetMappingRule(for: character)
+                
+            } else if choice == 2 {
+                customMappingRule(for: character)
+                
+            }
+            characterIndex += 1
+        }
+        if !bufferWord.isEmpty {
+            let reversedWord = String(bufferWord.reversed())
+            arrayOfReversedWords.append(addingExcludedCharacters(to: reversedWord))
+            
+        } else {
+            arrayOfReversedWords.append(addingExcludedCharacters(to: ""))
+        }
+        wordIndex += 1
+    }
+    
+    private func alphabetMappingRule(for character: Character) {
+        if Self.alphabetLetters.contains(character.lowercased()) {
             bufferWord.append(character)
         } else {
             excludedCharacters[characterIndex] = String(character)
         }
     }
     
-    private  func customRuleMappingOf(character: Character) {
+    private func customMappingRule(for character: Character) {
         if customExceptions.lowercased().contains(character.lowercased()) {
             excludedCharacters[characterIndex] = String(character)
         } else {
@@ -73,7 +78,7 @@ final class ReverseWordsModel {
         }
     }
     
-    private  func addExcludedCharactersTo(_ reverseword: String) -> String {
+    private  func addingExcludedCharacters(to reverseword: String) -> String {
         var reversedWord = reverseword
         for character in excludedCharacters.sorted(by: { $0.0 < $1.0 }) {
             reversedWord.insert(contentsOf: character.value,

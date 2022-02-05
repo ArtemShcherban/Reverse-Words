@@ -29,14 +29,18 @@ class ReverseWordsUITests: XCTestCase {
         app.launch()
     }
     
+    func typeInReverseText(_ text: String) {
+        textToReverse.tap()
+        textToReverse.typeText(text)
+    }
+    
     func testReverseButtonDisplayReversedTextOnTap() {
         //       given
         let inputString = "Super Retina XDR display \n"
         let expectedString = "repuS aniteR RDX yalpsid"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         reverseButton.tap()
         
         //       then
@@ -49,8 +53,7 @@ class ReverseWordsUITests: XCTestCase {
         let expectedString = ""
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         reverseButton.tap()
         reverseButton.tap()
         
@@ -65,11 +68,9 @@ class ReverseWordsUITests: XCTestCase {
         let additionalInputString = " XDR display \n"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         reverseButton.tap()
-        textToReverse.tap()
-        textToReverse.typeText(additionalInputString)
+        typeInReverseText(additionalInputString)
         
         //       then
         XCTAssertFalse(reverseTextLabel.exists)
@@ -81,8 +82,7 @@ class ReverseWordsUITests: XCTestCase {
         let expectedButtonTitle = "Reverse"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         returnButton.tap()
         
         //       then
@@ -91,10 +91,8 @@ class ReverseWordsUITests: XCTestCase {
         XCTAssertEqual(reverseButton.label, expectedButtonTitle, "Button title should be 'Reverse'")
     }
     
-    func testTextToIgnoreShouldAppearAfterSegmentIndexChanged() {
-        
+    func testTextToIgnoreAppearOnSegmentChange() {
         segmentControl.buttons.element(boundBy: 2).tap()
-        
         XCTAssertTrue(textToIgnore.exists)
     }
     
@@ -104,8 +102,7 @@ class ReverseWordsUITests: XCTestCase {
         let expectedString = "Y$T§R(EW¿Q8"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         segmentControl.buttons.element(boundBy: 0).tap()
         reverseButton.tap()
         
@@ -123,8 +120,7 @@ class ReverseWordsUITests: XCTestCase {
         segmentControl.buttons.element(boundBy: 2).tap()
         textToIgnore.tap()
         textToIgnore.typeText(customExceptions)
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         returnButton.tap()
         reverseButton.tap()
         
@@ -132,14 +128,13 @@ class ReverseWordsUITests: XCTestCase {
         XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
     }
     
-    func testResultChecAfeterSegmentIndexChangedkWithAlphabetRule() {
+    func testResultCheckAfterSegmentIndexChangedkWithAlphabetRule() {
         //       given
         let inputString = "Q$W§E(RT¿Y8"
         let expectedString = "Y$T§R(EW¿Q8"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         returnButton.tap()
         reverseButton.tap()
         segmentControl.buttons.element(boundBy: 0).tap()
@@ -155,8 +150,7 @@ class ReverseWordsUITests: XCTestCase {
         let expectedString = "8$WYTR(E¿§Q"
         
         //       when
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         returnButton.tap()
         reverseButton.tap()
         segmentControl.buttons.element(boundBy: 2).tap()
@@ -169,14 +163,13 @@ class ReverseWordsUITests: XCTestCase {
         XCTAssertEqual(reverseTextLabel.label, expectedString, "Strings should be the same")
     }
     
-    func testReverseButtonStateWithEnteredStringAndSwitchControllFlipped() {
+    func testReverseButtonStateWithEnteredStringAndSwitchControlOff() {
         //       given
         let inputString = "Q$W§E(RT¿Y8"
         
         //       when
         resultSwitch.tap()
-        textToReverse.tap()
-        textToReverse.typeText(inputString)
+        typeInReverseText(inputString)
         resultSwitch.tap()
         
         //       then

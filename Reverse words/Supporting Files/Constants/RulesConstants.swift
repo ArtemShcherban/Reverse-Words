@@ -13,7 +13,7 @@ struct RulesConstants {
     This application will reverse your words.
     Please type text below.
 """
-   
+    
     static let alphabetRule = """
     This application will reverse your words.
     Please type text below.

@@ -18,13 +18,14 @@ final class ReverseWordsTextField: UITextField {
         super.init(coder: coder)
         configure()
     }
-     
-   private func configure() {
+    
+    private func configure() {
         backgroundColor = .white
         textColor = ColorsConstants.greyColor
         font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular,
-                                                 size: FontConstants.Size.regular)
+                      size: FontConstants.Size.regular)
         
         clearButtonMode = .whileEditing
+//        spellCheckingType = .no
     }
 }

@@ -9,18 +9,22 @@ import UIKit
 
 final class ReverseWordsView: UIView {
     
-    lazy var resultSwitch = ResultSwitch()
+    lazy var resultSwitch: UISwitch = {
+        let tempResultSwitch = UISwitch()
+        tempResultSwitch.onTintColor = ColorsConstants.blueColor
+        return tempResultSwitch
+    }()
     
     lazy var resultSwitchTextLabel: UILabel = {
-     let tempResultSwitchTextLabel = UILabel()
+        let tempResultSwitchTextLabel = UILabel()
         tempResultSwitchTextLabel.backgroundColor = .white
         tempResultSwitchTextLabel.textColor = ColorsConstants.greyColor.withAlphaComponent(0.2)
         tempResultSwitchTextLabel.font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular, size: FontConstants.Size.regular)
         tempResultSwitchTextLabel.numberOfLines = 0
         tempResultSwitchTextLabel.lineBreakMode = .byWordWrapping
         tempResultSwitchTextLabel.attributedText = NSMutableAttributedString(string: "result in real time",
-                                                                         attributes: [NSAttributedString.Key.kern:
-                                                                                       FontConstants.Kern.regular])
+                                                                             attributes: [NSAttributedString.Key.kern:
+                                                                                            FontConstants.Kern.regular])
         tempResultSwitchTextLabel.textAlignment = .left
         
         return tempResultSwitchTextLabel
@@ -48,17 +52,17 @@ final class ReverseWordsView: UIView {
         return tempMainTitleTextLabel
     }()
     
-     lazy var subTitleTextLabel: UILabel = {
+    lazy var subtitleTextLabel: UILabel = {
         let tempSubTitleTextLabel = UILabel()
-         tempSubTitleTextLabel.backgroundColor = .white
-         tempSubTitleTextLabel.textColor = ColorsConstants.greyColor.withAlphaComponent(0.6)
-         tempSubTitleTextLabel.font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular, size: FontConstants.Size.regular)
-         tempSubTitleTextLabel.numberOfLines = 0
-         tempSubTitleTextLabel.lineBreakMode = .byWordWrapping
-         tempSubTitleTextLabel.attributedText = NSMutableAttributedString(string: RulesConstants.mainRule,
-                                                                          attributes: [NSAttributedString.Key.kern:
+        tempSubTitleTextLabel.backgroundColor = .white
+        tempSubTitleTextLabel.textColor = ColorsConstants.greyColor.withAlphaComponent(0.6)
+        tempSubTitleTextLabel.font = UIFont(name: FontConstants.FontName.sfUIDisplayRegular, size: FontConstants.Size.regular)
+        tempSubTitleTextLabel.numberOfLines = 0
+        tempSubTitleTextLabel.lineBreakMode = .byWordWrapping
+        tempSubTitleTextLabel.attributedText = NSMutableAttributedString(string: RulesConstants.mainRule,
+                                                                         attributes: [NSAttributedString.Key.kern:
                                                                                         FontConstants.Kern.regular])
-         tempSubTitleTextLabel.textAlignment = .center
+        tempSubTitleTextLabel.textAlignment = .center
         return tempSubTitleTextLabel
     }()
     
@@ -82,12 +86,13 @@ final class ReverseWordsView: UIView {
     
     lazy var textToIgnoreTextField: ReverseWordsTextField = {
         let tempTextToIgnoreTextField = ReverseWordsTextField()
+        tempTextToIgnoreTextField.clearButtonMode = .never
         tempTextToIgnoreTextField.placeholder = "Text to ignore"
         tempTextToIgnoreTextField.borderStyle = .roundedRect
         return tempTextToIgnoreTextField
     }()
     
-    lazy var segmentControl = RulesSegmentControl(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    lazy var segmentControl = RulesSegmentControl(frame: .zero)
     
     lazy var reverseButton = ReverseButton()
     
@@ -97,7 +102,7 @@ final class ReverseWordsView: UIView {
         self.addSubview(inputTextView)
         self.addSubview(separatorView)
         self.addSubview(mainTitleTextLabel)
-        self.addSubview(subTitleTextLabel)
+        self.addSubview(subtitleTextLabel)
         self.addSubview(reverseTextLabel)
         self.addSubview(textToReverseTextField)
         self.addSubview(segmentControl)
@@ -148,13 +153,13 @@ final class ReverseWordsView: UIView {
                                      mainTitleTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 152)])
         
         // Sub Title Text Label Constraints
-        subTitleTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([subTitleTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+        subtitleTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([subtitleTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                                                 constant:
                                                                                     SizeConstants.Indents.left),
-                                     subTitleTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                     subtitleTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                                                                  constant: SizeConstants.Indents.right),
-                                     subTitleTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 209)])
+                                     subtitleTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 209)])
         
         // Input Text View Constraints
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -170,7 +175,7 @@ final class ReverseWordsView: UIView {
                                                                                         inputTextView.leadingAnchor, constant: SizeConstants.Indents.left),
                                      textToReverseTextField.trailingAnchor.constraint(equalTo:
                                                                                         inputTextView.trailingAnchor,
-                                                                               constant: SizeConstants.Indents.right),
+                                                                                      constant: SizeConstants.Indents.right),
                                      textToReverseTextField.centerYAnchor.constraint(equalTo: inputTextView.centerYAnchor)])
         
         // Separator View Constraint
@@ -178,15 +183,15 @@ final class ReverseWordsView: UIView {
         NSLayoutConstraint.activate([separatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                                             constant: SizeConstants.Indents.left),
                                      separatorView.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                                            constant: SizeConstants.Indents.right),
+                                                                             constant: SizeConstants.Indents.right),
                                      separatorView.topAnchor.constraint(equalTo: self.inputTextView.bottomAnchor)])
         
         // Reverse Text Label Constraint
         reverseTextLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([reverseTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                                            constant: SizeConstants.Indents.left),
+                                                                               constant: SizeConstants.Indents.left),
                                      reverseTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                                            constant: SizeConstants.Indents.right),
+                                                                                constant: SizeConstants.Indents.right),
                                      reverseTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 372)])
     }
     
@@ -208,21 +213,21 @@ final class ReverseWordsView: UIView {
     func setRulesSegmentControlConstraints() {
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([segmentControl.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                                                  constant: SizeConstants.Indents.left),
+                                                                             constant: SizeConstants.Indents.left),
                                      segmentControl.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                                                   constant: SizeConstants.Indents.right),
+                                                                              constant: SizeConstants.Indents.right),
                                      segmentControl.topAnchor.constraint(equalTo: inputTextView.bottomAnchor,
-                                                                              constant: 65)])
+                                                                         constant: 65)])
     }
     
     func setTextToIgnoreTextFieldConstraints() {
         textToIgnoreTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([textToIgnoreTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                                                  constant: SizeConstants.Indents.left),
+                                                                                    constant: SizeConstants.Indents.left),
                                      textToIgnoreTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                                                   constant: SizeConstants.Indents.right),
+                                                                                     constant: SizeConstants.Indents.right),
                                      textToIgnoreTextField.topAnchor.constraint(equalTo: segmentControl.bottomAnchor,
-                                                                              constant: 18)])
+                                                                                constant: 18)])
     }
     
     func setReverseButtonConstraints() {
@@ -231,7 +236,7 @@ final class ReverseWordsView: UIView {
         NSLayoutConstraint.activate([reverseButton.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                                             constant: SizeConstants.Indents.left),
                                      reverseButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                                            constant: SizeConstants.Indents.right),
+                                                                             constant: SizeConstants.Indents.right),
                                      reverseButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -66)])
     }
 }
