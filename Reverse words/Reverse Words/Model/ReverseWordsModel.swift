@@ -42,13 +42,15 @@ final class ReverseWordsModel {
     private func singleWordProcessing(_ word: String.SubSequence, choice: Int) {
         characterIndex = 0
         for character in word {
-            if choice == 0 {
+            switch choice {
+            case 0:
                 alphabetMappingRule(for: character)
-                
-            } else if choice == 2 {
+            case 2:
                 customMappingRule(for: character)
-                
+            default:
+                break
             }
+            
             characterIndex += 1
         }
         if !bufferWord.isEmpty {

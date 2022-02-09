@@ -142,14 +142,16 @@ final class ReverseWordsViewController: UIViewController {
     }
     
     private func ruleSelection() {
-        if reverseWordsView?.segmentControl.selectedSegmentIndex == 0 {
+        guard let control = reverseWordsView?.segmentControl else { return }
+        switch control.selectedSegmentIndex {
+        case 0:
             reverseWordsView?.subtitleTextLabel.text = RulesConstants.alphabetRule
-            
-        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
+        case 2:
             reverseWordsView?.subtitleTextLabel.text = RulesConstants.customRule
-            
-        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 1 {
+        case 1:
             reverseWordsView?.subtitleTextLabel.text = RulesConstants.mainRule
+        default:
+            break
         }
     }
     
@@ -165,17 +167,19 @@ final class ReverseWordsViewController: UIViewController {
     private func reverseInputedString() -> String {
         let inputedString = reverseWordsView?.textToReverseTextField.text ?? ""
         var reversedString = ""
-        
-        if reverseWordsView?.segmentControl.selectedSegmentIndex == 1 {
+        guard let control = reverseWordsView?.segmentControl else { return "" }
+
+        switch control.selectedSegmentIndex {
+        case 1:
             reversedString = reverseWordsModel.reverseWordsWithNoRules(inputedString)
-            
-        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 0 {
+        case 0:
             reversedString = reverseWordsModel.reverseWordsWithRule(inputedString, 0)
-            
-        } else if reverseWordsView?.segmentControl.selectedSegmentIndex == 2 {
+        case 2:
             reversedString = reverseWordsModel.reverseWordsWithRule(inputedString, 2)
-            
+        default:
+            break
         }
+
         return reversedString
     }
     
@@ -211,7 +215,6 @@ extension ReverseWordsViewController: UITextFieldDelegate {
                     reverseWordsView?.reverseTextLabel.text = ""
                     reverseWordsView?.separatorView.isActive = true
                     textField.textColor = ColorsConstants.greyColor
-//                    textField.text = textField.text ?? ""  + "Artem"
                 }
             } else if textField === reverseWordsView?.textToIgnoreTextField {
                 if reverseWordsView?.reverseButton.isSelected == true && textField.text != ruleToEditing {
